@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>YTP</title>
+    </head>
+    <body>
+        <div id="ytplayer"></div>
+
+        <div>
+            <button id="toggle">PLAY/PAUSE</button>
+            <button id="replay">REPLAY</button>
+            <button id="stop">STOP</button>
+            <button id="volup">+VOL</button>
+            <button id="voldown">-VOL</button>
+            <button id="seekup">+SEEK</button>
+            <button id="seekdown">-SEEK</button>
+            <input type="text" name="id"> →　<button id="change">SET VIDEO</button>
+            <ul>
+                <li>動画IDのサンプル
+                    <ul>
+                        <li>vTd7o_v0mDw</li>
+                        <li>64eIdY9GQN4</li>
+                        <li>zmG8JYiYvgg</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <script src="../lib/ytp.js"></script>
+        <script>
+            var ytp = new YTP({
+                options: {
+                    videoId: '64eIdY9GQN4'
+                },
+            });
+            
+            document.querySelector('#toggle').addEventListener('click', () => ytp.toggle())
+            document.querySelector('#replay').addEventListener('click', () => ytp.replay())
+            document.querySelector('#stop').addEventListener('click', () => ytp.stop())
+            document.querySelector('#volup').addEventListener('click', () => ytp.setVolume(10))
+            document.querySelector('#voldown').addEventListener('click', () => ytp.setVolume(-10))
+            document.querySelector('#seekup').addEventListener('click', () => ytp.seekTo(60))
+            document.querySelector('#seekdown').addEventListener('click', () => ytp.seekTo(-60))
+
+            document.querySelector('#change').addEventListener('click', () => {
+                const id = document.querySelector('input[name="id"]').value
+                ytp.loadVideoById(id)
+            })
+        </script>
+    </body>
+</html>
